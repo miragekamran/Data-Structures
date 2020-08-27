@@ -82,11 +82,38 @@ class BSTNode:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        # the node with the maximum value will also be the right-most node
+        if self.right is None:
+            # Base Case
+            # We're already at the right most node
+            return self.value
+        else:
+            # Recursive case: make the problem smaller to get to the base case
+            # Go right
+            return self.right.get_max()
+        # iterate get_max():
+        # start at the root (self)
+        cur_node = self
+        # keep going right until you can't anymore
+        # --> stop when cur_node.right is None
+        while cur_node.right is not None:
+            # move closer to the "base case"
+            cur_node = cur_node.right
+        # return
+        # "base case"
+        return cur_node.value
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        # Will have to look at both branches
+        # Start at the root
+        fn(self.value)
+        if self.left is not None:
+            # Go left
+            self.left.for_each(fn)
+        if self.right is not None:
+            # Go right
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
